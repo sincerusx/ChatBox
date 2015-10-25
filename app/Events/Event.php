@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace ChatBox\Events;
 
 abstract class Event
 {

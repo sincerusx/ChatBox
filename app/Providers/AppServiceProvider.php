@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace ChatBox\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
