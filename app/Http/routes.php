@@ -32,25 +32,29 @@ Route::get('/alert', function(){
 
 
 /*
- * Authentication
+ * User Authentication
  */
 
 Route::get('signup', [
 	'uses'  =>  '\ChatBox\Http\Controllers\AuthController@getSignUp',
 	'as'    =>  'auth.signup',
+	'middleware'    =>  ['guest'],
 ]);
 
 Route::post('signup', [
 	'uses'  =>  '\ChatBox\Http\Controllers\AuthController@postSignUp',
+	'middleware'    =>  ['guest'],
 ]);
 
 Route::get('signin', [
 	'uses'  =>  '\ChatBox\Http\Controllers\AuthController@getSignIn',
 	'as'    =>  'auth.signin',
+	'middleware'    =>  ['guest'],
 ]);
 
 Route::post('signin', [
 	'uses'  =>  '\ChatBox\Http\Controllers\AuthController@postSignIn',
+	'middleware'    =>  ['guest'],
 ]);
 
 Route::get('signout', [
