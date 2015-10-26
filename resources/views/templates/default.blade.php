@@ -9,9 +9,10 @@
 </head>
 <body>
 
-    @include('templates/navigation')
+    @include('templates.partials.navigation')
 
     <div class="container">
+        @include('templates.partials.alerts')
         @yield('content')
     </div>
 

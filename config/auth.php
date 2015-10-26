@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => ChatBox\User::class,
+    'model' => ChatBox\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------
