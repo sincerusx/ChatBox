@@ -79,3 +79,12 @@ Route::get('/user/{username}', [
 	'uses'  =>  '\ChatBox\Http\Controllers\ProfileController@getProfile',
 	'as'    =>  'profile.index'
 ]);
+Route::get('/profile/edit', [
+	'uses'  =>  '\ChatBox\Http\Controllers\ProfileController@getEdit',
+	'as'    =>  'profile.edit',
+	'middleware'    =>  ['auth'],
+]);
+Route::post('/profile/edit', [
+	'uses'  =>  '\ChatBox\Http\Controllers\ProfileController@postEdit',
+	'middleware'    =>  ['auth'],
+]);
