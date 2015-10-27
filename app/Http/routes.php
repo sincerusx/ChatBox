@@ -71,3 +71,11 @@ Route::get('/search',[
 	'uses'  =>  '\ChatBox\Http\Controllers\SearchController@getSearchResults',
 	'as'    =>  'search.results',
 ]);
+
+/*
+ * User Profile
+ */
+Route::get('/user/{username}', [
+	'uses'  =>  '\ChatBox\Http\Controllers\ProfileController@getProfile',
+	'as'    =>  'profile.index'
+]);

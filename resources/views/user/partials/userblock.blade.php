@@ -1,10 +1,10 @@
 <div class="media">
-    <a href="" class="pull-left">
+    <a href="{{ route('profile.index', ['username' => $user->username]) }}" class="pull-left">
         <img class="media-object" src="{{ $user->getAvatarURL() }}" alt="{{ $user->getNameOrUsername() }}">
     </a>
     <div class="media-body">
         <h4 class="media-heading">
-            <a href="#">
+            <a href="{{ route('profile.index', ['username' => $user->username]) }}">
                 {{ $user->getNameOrUsername() }}
             </a>
         </h4>
