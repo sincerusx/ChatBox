@@ -88,3 +88,12 @@ Route::post('/profile/edit', [
 	'uses'  =>  '\ChatBox\Http\Controllers\ProfileController@postEdit',
 	'middleware'    =>  ['auth'],
 ]);
+
+/*
+ * Friends
+ */
+Route::get('/friends', [
+	'uses'  =>  '\ChatBox\Http\Controllers\FriendController@getIndex',
+	'as'    =>  'friends.index',
+	'middleware'    =>  ['auth'],
+]);
