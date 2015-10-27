@@ -97,3 +97,13 @@ Route::get('/friends', [
 	'as'    =>  'friends.index',
 	'middleware'    =>  ['auth'],
 ]);
+Route::get('/friends/add/{username}', [
+	'uses'  =>  '\ChatBox\Http\Controllers\FriendController@getAdd',
+	'as'    =>  'friends.add',
+	'middleware'    =>  ['auth'],
+]);
+Route::get('/friends/accept/{username}', [
+	'uses'  =>  '\ChatBox\Http\Controllers\FriendController@getAccept',
+	'as'    =>  'friends.accept',
+	'middleware'    =>  ['auth'],
+]);
