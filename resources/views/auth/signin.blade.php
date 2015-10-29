@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-6">
             <form action="{{ route('auth.signin') }}" method="post" role="form" class="form-vertical">
-                <div class="form-group {{ $errors->has('email') ? 'has-error' :' ' }}">
-                    <label for="email" class="control-label">Email</label>
-                    <input type="text" name="email" class="form-control" id="email">
-                    @if($errors->has('email'))
+                <div class="form-group {{ $errors->has('username') ? 'has-error' :' ' }}">
+                    <label for="username" class="control-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="username">
+                    @if($errors->has('username'))
                         <span class="help-block">{{$errors->first('email')}}</span>
                     @endif
                 </div>
