@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class FriendsTable extends Migration
+class Statuses extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,14 @@ class FriendsTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('friends', function(Blueprint $table){
+        // Parent ID for replies
+        Schema::create('statuses', function(Blueprint $table){
             $table->increments('id');
-	        $table->integer('user_id');
-	        $table->integer('friend_id');
-	        $table->boolean('accepted');
-	        $table->timestamps();
-    });
+            $table->integer('user_id');
+            $table->integer('parent_id')->nullable();
+            $table->text('body');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -29,6 +29,6 @@ class FriendsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('statuses');
     }
 }

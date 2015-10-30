@@ -62,9 +62,13 @@ class User extends Model implements AuthenticatableContract {
         return $this->first_name ?: $this->username;
     }
 
+    // Avatar
+
     public function getAvatarURL(){
 		return "https://www.gravatar.com/avatar/{{ md($this->email) }}?d=mm&s=80";
     }
+
+    // Friends
 
     public function friendsOfMine(){
         return $this->belongsToMany('ChatBox\Models\User', 'friends', 'user_id', 'friend_id');
@@ -118,6 +122,12 @@ class User extends Model implements AuthenticatableContract {
 
     public function isFriendsWith(User $user){
         return (bool) $this->friends()->where('id', $user->id)->count();
+    }
+
+    // Statuses
+
+    public function statuses(){
+        return $this->hasMany('ChatBox\Models\Status', 'user_id');
     }
 
 

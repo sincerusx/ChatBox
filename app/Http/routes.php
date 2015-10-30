@@ -107,3 +107,17 @@ Route::get('/friends/accept/{username}', [
 	'as'    =>  'friends.accept',
 	'middleware'    =>  ['auth'],
 ]);
+
+/*
+ * Status
+ */
+Route::post('/status', [
+	'uses'  =>  '\ChatBox\Http\Controllers\StatusController@postStatus',
+	'as'    =>  'status.post',
+	'middleware'    =>  ['auth'],
+]);
+Route::post('/status/{statusID}/reply', [
+	'uses'  =>  '\ChatBox\Http\Controllers\StatusController@postReply',
+	'as'    =>  'status.reply',
+	'middleware'    =>  ['auth'],
+]);
