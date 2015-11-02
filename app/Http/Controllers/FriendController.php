@@ -20,30 +20,41 @@ class FriendController extends Controller{
 			->with('requests', $requests);
 	}
 
+	/*
+	 * Send a Friend Request
+	 */
+
 	public function getAdd($username){
+
+		// Gets requested user
 		$user = User::where('username', $username)->first();
 
+		//
 		if(!$user){
-			return redirect()->route('home')->with('info', 'That user could not be found');
+			return redirect()->route('home')->with('info', 'This user could not be found');
 		}
 
+		// Prevents user from sending themselves a friend request
 		if(Auth::user()->id === $user->id){
 			return redirect()
 				->route('home');
 
 		}
 
+		// Checks wether IF there is a friend request pending between the two users
 		if (Auth::user()->hasFriendRequestPending($user) || $user->hasFriendRequestPending(Auth::user())){
 			return redirect()->route('profile.index',['username' => $user->username])
 				->with('info', 'Friend request already pending');
 		}
 
+		// Checks is Auth::user is already friends with the user
 		if (Auth::user()->isFriendsWith($user)){
 			return redirect()
 				->route('profile.index', ['username' => $user->username])
 				->with('info', 'You are already friends.');
 		}
 
+		// Allows user to send a friend request
 		Auth::user()->addFriend($user);
 
 		return redirect()
@@ -51,20 +62,34 @@ class FriendController extends Controller{
 			->with('info', 'Friend request sent');
 	}
 
+	/*
+	 * Accepting a Friend Request
+	 */
+
 	public function getAccept($username){
 		$user = User::where('username', $username)->first();
 
+		// Checks if there is already a request pending
 		if(!$user){
 			return redirect()
 				->route('home')->
 				with('info', 'That user could not be found');
 		}
 
+		// Checks if thier is a friend request pending between the two
 		if(!Auth::user()->hasFriendRequestReceived($user)){
 			return redirect()
 				->route('home');
 		}
 
+		// Checks IF users are already friends
+		if ( Auth::user()->isFriendsWith($user) ) {
+			return redirect()
+				->route('profile.index', ['username' => $username])
+				->with('info', 'You are already friends');
+		}
+
+		// Allows user to accept friend request
 		Auth::user()->acceptFriendRequest($user);
 
 		return redirect()
@@ -72,4 +97,5 @@ class FriendController extends Controller{
 			->with('info', 'Friend request accepted.');
 
 	}
+
 }

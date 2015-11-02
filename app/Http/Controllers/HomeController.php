@@ -9,8 +9,10 @@ class HomeController extends Controller{
 	
 	public function index(){
 
+		// Shows timeline if User is Auth
 		if (Auth::check()){
 
+			// Gets status from user and friends
 			$statuses =  Status::notReply()->where(function($query){
 				return $query->where('user_id', Auth::user()->id)
 					->orWhereIn('user_id', Auth::user()->friends()->lists('id'));
@@ -24,6 +26,7 @@ class HomeController extends Controller{
 				->with('statuses', $statuses);
 		}
 
+		// If not authenticated user just show home
 		return view('home');
 
 	}

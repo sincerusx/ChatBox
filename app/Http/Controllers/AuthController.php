@@ -16,6 +16,11 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller{
 
+	/*
+	 * Sign Up
+	 */
+
+
 	// Get request to page
 	public function getSignUp(){
 		return view('auth.signup');
@@ -44,6 +49,10 @@ class AuthController extends Controller{
 		return view('auth.signin');
 	}
 
+	/*
+	 * Sign In
+	 */
+
 	public function postSignIn(Request $request){
 		$this->validate($request, [
 			'username'      =>  'required',
@@ -58,6 +67,10 @@ class AuthController extends Controller{
 		return redirect()->route('home')->with('info', 'You have sucessfully signed in!');
 
 	}
+
+	/*
+	 * Sign Out
+	 */
 
 	public function getSignOut(){
 		Auth::logout();

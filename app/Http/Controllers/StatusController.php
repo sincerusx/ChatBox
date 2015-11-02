@@ -10,6 +10,7 @@ use Auth;
 
 class StatusController extends Controller{
 
+	// Add a new status
 	public function postStatus(Request $request){
 
 		$this->validate($request,[
@@ -33,24 +34,28 @@ class StatusController extends Controller{
 			'required'  =>  'The reply body is required'
 		]);
 
+		// Find the status that the reply belongs to
 		$status = Status::notReply()->find($statusId);
 
+
+		// Fail if the status doesn't exist
 		if (!$status){
 			return redirect()
 				->route('home');
 		}
 
+		// Check if the currently authenticated user is friends with the owner of this status and not his own status
 		if (!Auth::user()->isFriendsWith($status->user) && Auth::user()->id !== $status->user->id){
 			return redirect()
 				->route('home');
 		}
 
-
-
+		// Get the reply
 		$reply = Status::create([
 			'body'  =>  $request->input("reply-{$statusId}"),
 		])->user()->associate(Auth::user());
 
+		// Reply is saved using the REPLiES method
 		$status->replies()->save($reply);
 
 		return redirect()->back();

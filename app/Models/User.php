@@ -41,6 +41,10 @@ class User extends Model implements AuthenticatableContract {
         'remember_token'
     ];
 
+
+    /*
+     * Get Name helper functions
+     */
     public function getName(){
 
         if($this->first_name && $this->last_name){
@@ -54,22 +58,22 @@ class User extends Model implements AuthenticatableContract {
         return null;
     }
 
+    // Get Name or Username
     public function getNameOrUsername(){
         return $this->getName() ?: $this->username;
     }
 
+    // Get First Name or Username
     public function getFirstNameOrUsername(){
         return $this->first_name ?: $this->username;
     }
 
     // Avatar
-
     public function getAvatarURL(){
 		return "https://www.gravatar.com/avatar/{{ md($this->email) }}?d=mm&s=80";
     }
 
-    // Friends
-
+    // Relationship with Friends table
     public function friendsOfMine(){
         return $this->belongsToMany('ChatBox\Models\User', 'friends', 'user_id', 'friend_id');
     }
@@ -87,6 +91,7 @@ class User extends Model implements AuthenticatableContract {
             ->get());
     }
 
+    // Friend request handling
     public function friendRequests(){
         return $this->friendsOfMine()
             ->wherePivot('accepted', false)
