@@ -130,6 +130,14 @@ class User extends Model implements AuthenticatableContract {
         return (bool) $this->friends()->where('id', $user->id)->count();
     }
 
+    // Remove friend
+
+    public function deleteFriend(User $user){
+
+        $this->friendOf()->detach($user->id);
+
+    }
+
     // Statuses
 
     public function statuses(){
