@@ -2,6 +2,7 @@
 
 namespace ChatBox\Models;
 
+use ChatBox\Models\Status;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -135,5 +136,23 @@ class User extends Model implements AuthenticatableContract {
         return $this->hasMany('ChatBox\Models\Status', 'user_id');
     }
 
+    // Like Status
+
+    // Creates Like Relationship with User
+    public function likes(){
+
+        return $this->hasMany('ChatBox\Models\Like', 'user_id');
+
+    }
+
+    // Checks if user has already liked a particular status
+    public function hasLikedStatus(Status $status){
+
+        return (bool) $status
+            ->likes()
+            ->where('user_id', $this->id)
+            ->count();
+
+    }
 
 }

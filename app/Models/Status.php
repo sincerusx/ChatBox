@@ -40,6 +40,16 @@ class Status extends Model{
 
 	}
 
+	/*
+	 * Allows likes
+	 */
+
+	public function likes(){
+
+		return $this->morphMany('ChatBox\Models\Like', 'likeable');
+
+	}
+
 
 
 }
