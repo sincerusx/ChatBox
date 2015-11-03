@@ -135,6 +135,7 @@ class User extends Model implements AuthenticatableContract {
     public function deleteFriend(User $user){
 
         $this->friendOf()->detach($user->id);
+        $this->friendsOfMine()->detach($user->id);
 
     }
 
