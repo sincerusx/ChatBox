@@ -41,8 +41,10 @@
                             <p>{{ $status->body }}</p>
                             <ul class="list-inline">
                                 <li>{{ $status->created_at->diffForHumans() }}</li>
-                                <li><a href="#">Like</a> </li>
-                                <li>10 likes</li>
+                                @if ($status->user->id !== Auth::user()->id)
+                                    <li><a href="#">Like</a> </li>
+                                    <li>10 likes</li>
+                                @endif
                             </ul>
 
                             {{--Reply--}}
@@ -61,8 +63,10 @@
                                     <p>{{ $reply->body }}</p>
                                     <ul class="list-inline">
                                         <li>{{ $reply->created_at->diffForHumans() }}</li>
-                                        <li><a href="#">Like</a></li>
-                                        <li>4 Likes</li>
+                                        @if ($reply->user->id !== Auth::user()->id)
+                                            <li><a href="#">Like</a></li>
+                                            <li>4 Likes</li>
+                                        @endif
                                     </ul>
                                 </div>
                             @endforeach

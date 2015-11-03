@@ -2,9 +2,12 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-3">
             @include('user.partials.userblock')
             <hr>
+        </div>
+
+        <div class="col-lg-6">
 
             @if (!$statuses->count())
 
@@ -79,7 +82,8 @@
 
         </div>
 
-        <div class="col-lg-4 col-lg-offset-3">
+        {{--<div class="col-lg-4 col-lg-offset-3">--}}
+        <div class="col-lg-3">
 
             @if (Auth::user()->hasFriendRequestPending($user))
                 <p>Waiting for {{ $user->getNameOrUsername() }} to accept your request.</p>
